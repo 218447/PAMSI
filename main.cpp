@@ -1,12 +1,15 @@
 #include "tab.hh"
 
+/* Program przyjmuje na wejście liczbę elementów, jakie maja być zaalokowane do tablicy dynamicznej, następnie je tworzy przy pomocy generatora liczb pseudolosowych.
+ */ 
+
 int main(int argc, char * argv[]) {
-  if (argc==1) exit(0);
+  if (argc==1) exit(0);   //brak argumentów wywołania programu
   else {
       
-      int rozmiar = 10;
-      int Ilosc = atoi (argv[1]);
-      clock_t s, f;
+      int rozmiar = 10;   //rozmiar początkowy tablicy 
+      int Ilosc = atoi (argv[1]);  //parsowanie argumentów wywołania
+      clock_t s, f;       //zmienne czasowe, do stopera
       double czas[3];
 
       Tablica* tab = new Tablica (rozmiar);
