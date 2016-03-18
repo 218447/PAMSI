@@ -1,34 +1,17 @@
-#include "lab.hh"
-#include <ctime>   //biblioteka mierzaca czas
-/* program sprawdzajacy poprawne dzialanie tablicy dynamicznej, nalezy stworzyc tablice 1 lub 2 elementowa
-*/
+#include "tab.hh"
 
-int main() {
+/* Program przyjmuje na wejście liczbę elementów, jakie maja być zaalokowane do tablicy dynamicznej, następnie je tworzy przy pomocy generatora liczb pseudolosowych.
+ */ 
 
-  int rozmiar;
-  clock_t s, f;    //zmienne typu clock
-  double czas=0;   //zmienna przechowujaca czas wykonania programu
-  int a=8;
-  int b=3;
-  int c=5;
- 
-  std::cout << "Podaj rozmiar tablicy: "<< std::endl;
-  std::cin >> rozmiar;
-  
-  s = clock();
-  
-  Tablica *tab =  new Tablica(rozmiar);
-  tab->dodajEl(a);
-  tab->dodajEl(b);
-  tab->dodajEl(c);
+int main(int argc, char * argv[]) {
+  if (argc==1) exit(0);   //brak argumentów wywołania programu
+  else {
+    tablicaTest *tab = new tablicaTest;
+    tab->przygotuj(argv[0]);
+    tab->wykonaj();
 
-  f = clock();
-  czas = (double)(f - s) / (double)(CLOCKS_PER_SEC); //konwersja na sekundy
-
-  std::cout << "Tablica: " << tab->liczbaEl[0] << tab->liczbaEl[1] << tab->liczbaEl[2] << std::endl;
-  std::cout << "Czas wykonania: " << czas << std::endl;
+    std::cout << "Metoda nr 1 dla: " << tab->rozmiar << " czas wykonania wynosi: " << tab->Czasy[0] <<std::endl;
+      std::cout << "Metoda nr 2 dla: " << tab->rozmiar << " czas wykonania wynosi: " << tab->Czasy[1] <<std::endl;
+      std::cout << "Metoda nr 3 dla: " << tab->rozmiar << " czas wykonania wynosi: " << tab->Czasy[2] <<std::endl;
+    }
 }
-
-
-
-
