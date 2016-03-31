@@ -18,12 +18,12 @@ class Stoper {
    private:
       clock_t poczatek;
       clock_t koniec;
-      double czas[];
+      double czas[3];
       int liczbaPomiarow;
    public:
       void start();
       void stop();
-      double wyswietl();
+      double * wyswietl();
       Stoper();
   
 };

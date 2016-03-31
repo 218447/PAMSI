@@ -10,14 +10,17 @@
 /* Definicja klasy testowej tablicy, która dziedziczy interfejs "interf.hh", i dziedziczy po Tablicy ("tab.hh") wszystkie metody i elementy.
  */
 
-class tablicaTest:Tablica {
+class tablicaTest: public Tablica, public Interfejs {
+      void Wyswietl();
       int Ilosc;
 
+  
    public:
-      double Czasy[];
-      void przygotuj();
+      double * Czasy;
+      void przygotuj(const char * iloscElementow);
       void  wykonaj();
       tablicaTest();
+      
 };
 
 #endif

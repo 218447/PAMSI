@@ -12,13 +12,9 @@ void Stoper::start() {
 void Stoper::stop() {
   koniec=clock();
   
-  czas[liczbaPomiarow-1]=(double)(koniec-poczatek)/(double)(CLOCKS_PER_SEC);
+  czas[liczbaPomiarow-1]=((double)(koniec-poczatek)/(double)(CLOCKS_PER_SEC))*1000;
 }
 
-double Stoper::wyswietl() {
-  if (czas) {
-    for (int i=0; i<=liczbaPomiarow; i++) {
-       return czas[i];
-    }
-  }
+double * Stoper::wyswietl() {
+        return czas;
 }

@@ -5,11 +5,25 @@ Tablica::Tablica (const int &rozmiar) {
   zajete=0;
   tab=new int[rozmiar];
 }
+Tablica::Tablica() {
+  wielkosc=10;
+  zajete=0;
+  tab=new int[wielkosc];
+}
+Tablica::Tablica (const Tablica & tabl) {
+  tab=new int[wielkosc];
+  memcpy (tab, tabl.tab, wielkosc);
+}
+  
 
 Tablica::~Tablica () {
   delete []tab;
 }
-
+void Tablica::Wyczysc () {
+  delete []tab;
+  int* nowaTab = new int[10];
+  tab= nowaTab;
+}
 void Tablica::dodajElem (const int &elem) {
   ++zajete;
   if (zajete>wielkosc) {

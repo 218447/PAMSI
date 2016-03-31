@@ -2,8 +2,8 @@
 #define TAB_HH
 
 #include <cstdlib>
-#include <ctime>
 #include <iostream>
+#include <cstring>
 
 /* Deklaracja klasy tablica, przechowującej dynamicznie obiekty typu integer.
 Zmienne prywatne:
@@ -21,17 +21,23 @@ rozmiar - zwraca rozmiar tablicy
 
 class Tablica {
    private:
-     int wielkosc;   //wielkosc tablicy   
      int zajete;     //liczba wykorzystanych komorek tablicy
      int* tab;       //zmienna przechowujaca komorki tablicy
  
    public:
+       int wielkosc;   //wielkosc tablicy   
+
      Tablica (const int &rozmiar);         //konstruktor tablicy
+     Tablica ();
+     void Wyczysc ();
      ~Tablica ();                          //destruktor tablicy
+     Tablica (const Tablica & tabl);         //konstruktor kopiujacy
      void dodajElem (const int &elem);     //dodawanie elementu, powiekszanie o 1 w przypadku braku wolnego miejsca
      void dodajElemPlus (const int &elem); //dodawanie elementu, powiekszanie o 100 w przypadku braku wolnego miejsca
      void dodajElemRazy (const int &elem); //dodawanie elementu, powiekszanie razy 2 w przypadku braku wolnego miejsca
      int rozmiar ();                       //zwraca wielkosc tablicy
+
+    friend class tablicaTest;
 
 };
 

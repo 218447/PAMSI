@@ -2,38 +2,38 @@
 
 tablicaTest::tablicaTest()
 {}
-void tablicaTest::przygotuj(char iloscElementow) {
-  int rozmiar = 10;   //rozmiar poczatkowy tablicy
-  tab = new int [rozmiar];
+void tablicaTest::przygotuj(const char * iloscElementow) {
   Ilosc = atoi (iloscElementow);
 }
 void tablicaTest::wykonaj() {
-  srand (time(NULL));
-  Stoper *stoper = new Stoper;
-
-  stoper->start();
+  srand (time(NULL) );
+    Stoper stoper;
+  stoper.start();
   for (int i=0; i<Ilosc; ++i) {
-    tab->dodajElem(rand() );
+    dodajElem(rand() );
   }
-  stoper->stop();
-  delete []tab;
+
+  stoper.stop();
   
-  tab = new int[10];
-  stoper->start();
+  Wyczysc();
+  stoper.start();
   for (int i=0; i<Ilosc; ++i) {
-    tab->dodajElemPlus(rand() );
+    dodajElemPlus(rand() );
   }
-  stoper->stop();
-  delete []tab;
-   
-  tab = new int[10];
-  stoper->start();
+  stoper.stop();
+  Wyczysc();
+  stoper.start();
   for (int i=0; i<Ilosc; ++i) {
-    tab->dodajElemRazy(rand() );
+    dodajElemRazy(rand() );
   }
-  stoper->stop();
-
-  Czasy=stoper->wyswietl();
+  stoper.stop();
+  Czasy = stoper.wyswietl();
+  Wyswietl();
+}
+void tablicaTest::Wyswietl() {
+  std::cout << "Metoda nr 1 dla: " << Ilosc << " czas wykonania wynosi: " << Czasy[0] << "ms" <<std::endl;
+  std::cout << "Metoda nr 2 dla: " << Ilosc << " czas wykonania wynosi: " << Czasy[1] << "ms" <<std::endl;
+  std::cout << "Metoda nr 3 dla: " << Ilosc << " czas wykonania wynosi: " << Czasy[2] << "ms" <<std::endl;
 }
    
     
