@@ -3,7 +3,7 @@
 
 #include "list.hh"
 
-/* Klasa implementuj±ca kolejkê. */
+/* Klasa implementujÂ±ca kolejkÃª. */
 
 class Queue {
 
