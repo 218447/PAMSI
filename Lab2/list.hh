@@ -3,7 +3,7 @@
 
 #include "node.hh"
 
-/* Klasa implementuj±ca listê */
+/* Klasa implementujÂ±ca listÃª */
 
 template <class T>
 class List {
