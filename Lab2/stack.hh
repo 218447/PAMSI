@@ -3,7 +3,7 @@
 
 #include "list.hh"
 
-/* Klasa implementuj±ca stos. */
+/* Klasa implementujÂ±ca stos. */
 
 template <class T> class Stack {
 
