@@ -7,7 +7,7 @@
 #include <cstdlib>
 
 
-/* Definicja klasy testowej tablicy, która dziedziczy interfejs "interf.hh", i dziedziczy po Tablicy ("tab.hh") wszystkie metody i elementy.
+/* Definicja klasy testowej tablicy, ktÃ³ra dziedziczy interfejs "interf.hh", i dziedziczy po Tablicy ("tab.hh") wszystkie metody i elementy.
  */
 
 class tablicaTest: public Tablica, public Interfejs {
