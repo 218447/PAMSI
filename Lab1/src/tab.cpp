@@ -55,7 +55,7 @@ void Tablica::dodajElemRazy (const int &elem) {
   ++zajete;
   if (zajete>wielkosc) {
     int* nowaTab = new int[zajete*2];
-    wielkosc*2;
+    wielkosc*=2;
     for (int i=0; i<=(zajete-2); i++) {
       nowaTab[i] = tab[i];
     }
