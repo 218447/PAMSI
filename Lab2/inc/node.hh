@@ -15,6 +15,7 @@ public:
   void setElement(T element);
   void setNext (Node<T> element);
   Node();
+  Node(T element);
   ~Node();
 };
 
