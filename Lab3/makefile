@@ -1,10 +1,7 @@
 CPPFLAGS=-pedantic -Wall -Iinc -std=c++11
 
-obj:
-	mkdir obj
-	
 Lab3: obj/main.o obj/list.o obj/tab.o obj/stoper.o obj/quicksort.o
-	g++ -o Lab2 obj/main.o obj/list.o obj/tab.o obj/stoper.o -o lab3.out
+	g++ obj/main.o obj/list.o obj/tab.o obj/stoper.o -o lab3.out
 
 obj/main.o: src/main.cpp inc/list.hh inc/stoper.hh inc/quicksort.hh
 	g++ -c ${CPPFLAGS} -o obj/main.o src/main.cpp
@@ -22,8 +19,12 @@ obj/stoper.o: src/stoper.cpp inc/stoper.hh
 	g++ -c ${CPPFLAGS} -o obj/stoper.o src/stoper.cpp
 	
 clean:
-	rm -f core* Lab2 obj/*
+	rm -f core* Lab3 obj/*
 
 remake:
-	rm -f core* Lab2 obj/*
+	rm -f core* Lab3 obj/*
 	make
+	
+obj:
+	mkdir obj
+	
