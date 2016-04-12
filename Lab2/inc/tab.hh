@@ -20,26 +20,26 @@ rozmiar - zwraca rozmiar tablicy
 */
 
 template <class T> class Tablica {
-   private:
-     int zajete;     //liczba wykorzystanych komorek tablicy
-     T* tab;       //zmienna przechowujaca komorki tablicy
- 
-   public:
-       int wielkosc;   //wielkosc tablicy   
+private:
+  int zajete;     //liczba wykorzystanych komorek tablicy
+  T* tab;       //zmienna przechowujaca komorki tablicy
+  int wielkosc;   //wielkosc tablicy   
 
-     Tablica (const int &rozmiar);         //konstruktor tablicy
-     Tablica ();
-     virtual void Wyczysc ();
-     virtual ~Tablica ();                          //destruktor tablicy
-     Tablica (const Tablica & tabl);         //konstruktor kopiujacy
-     virtual void dodajElem (const T &elem);     //dodawanie elementu, powiekszanie o 1 w przypadku braku wolnego miejsca
-     virtual void dodajElemPlus (const T &elem); //dodawanie elementu, powiekszanie o 100 w przypadku braku wolnego miejsca
-     virtual void dodajElemRazy (const T &elem); //dodawanie elementu, powiekszanie razy 2 w przypadku braku wolnego miejsca
-     virtual int rozmiar ();                       //zwraca wielkosc tablicy
-     virtual void dodaj (T element, int miejsce);
+public:
+  
+  Tablica (const int &rozmiar);         //konstruktor tablicy
+  Tablica ();
+  virtual void Wyczysc ();
+  virtual ~Tablica ();                          //destruktor tablicy
+  Tablica (const Tablica & tabl);         //konstruktor kopiujacy
+  virtual void dodajElem (const T &elem);     //dodawanie elementu, powiekszanie o 1 w przypadku braku wolnego miejsca
+  virtual void dodajElemPlus (const T &elem); //dodawanie elementu, powiekszanie o 100 w przypadku braku wolnego miejsca
+  virtual void dodajElemRazy (const T &elem); //dodawanie elementu, powiekszanie razy 2 w przypadku braku wolnego miejsca
+  virtual int rozmiar ();                       //zwraca wielkosc tablicy
+  virtual void dodaj (T& element, int miejsce);
   virtual void usun (int miejsce);
   virtual T wyswietl (int miejsce);
-
+  class outOfBoundsException {};
 };
 
 
@@ -111,40 +111,90 @@ template <class T> int Tablica<T>::rozmiar() {
     return wielkosc;
   }
 
-template <class T> void Tablica<T>::dodaj (T element, int miejsce) {
-  ++zajete;
-    T* nowaTab = new T[wielkosc+1];
-    wielkosc+=1;
-    for (int i=0; i<(miejsce-2); i++) {
+template <class T> void Tablica<T>::dodaj (T& element, int miejsce) {
+  try {
+    if (miejsce > wielkosc || miejsce <= 0) {
+      throw outOfBoundsException();
+    } else {
+      if (miejsce==1) {
+	T* nowaTab = new T[wielkosc+1];
+	wielkosc+=1;
+	nowaTab[miejsce-1]=element;
+	for (int i=(miejsce); i<wielkosc; i++) {
+	  int k=miejsce-1;
+	  nowaTab[i]=tab[k];
+	  ++k;
+	}
+	delete []tab;
+	tab=nowaTab;
+      }else if (miejsce == wielkosc || zajete==wielkosc) {
+	++zajete;
+	T* nowaTab = new T[wielkosc*2];
+	wielkosc*=2;
+	for (int i=0; i<=(miejsce-2); i++) {
       nowaTab[i] = tab[i];
-    }
-    nowaTab[miejsce-1]=element;
-    for (int i=(miejsce); i<wielkosc; i++) {
-      int k=miejsce-1;
-      nowaTab[i]=tab[k];
-      ++k;
-    }
-    delete []tab;
-    tab = nowaTab;
-}
-template <class T> void Tablica <T>::usun (int miejsce) {
-  --zajete;
-    T* nowaTab = new T[wielkosc-1];
-    wielkosc-=1;
-    for (int i=0; i<(miejsce-1); i++) {
-      nowaTab[i] = tab[i];
-    }
-   for (int i=(miejsce-1); i<wielkosc; i++) {
-      int k=miejsce;
-      nowaTab[i]=tab[k];
-      ++k;
-    }
-    delete []tab;
-    tab = nowaTab;
-}
-template <class T> T Tablica <T>::wyswietl (int miejsce) {
-  return tab[miejsce-1];
+	}
+	nowaTab[miejsce-1]=element;
+	for (int i=(miejsce); i<wielkosc; i++) {
+	  int k=miejsce-1;
+	  nowaTab[i]=tab[k];
+	  ++k;
+	}
+	delete []tab;
+	tab=nowaTab;
+      } else {
+	T* nowaTab = new T[wielkosc];
+	for (int i=0; i<=miejsce-2; i++) {
+	  nowaTab[i]=tab[i];
+	} 
+	nowaTab[miejsce-1] = element;
+	for (int i=miejsce; i<wielkosc; i++) {
+	  int k=miejsce-1;
+	  nowaTab[i]=tab[k];
+	  ++k;
+	} 
+	delete []tab;
+	tab=nowaTab;
+      }
+    }  
+  }
+  catch (outOfBoundsException) {
+    std::cout << "zły indeks"<<std::endl;
+    exit(1);
+  }
 }
 
+  template <class T> void Tablica <T>::usun (int miejsce) {
+    try {
+      if (miejsce > wielkosc || miejsce < 0) {
+	throw outOfBoundsException();
+      } else {
+	--zajete;
+	T* nowaTab = new T[wielkosc-1];
+	wielkosc-=1;
+	for (int i=0; i<(miejsce-1); i++) {
+	  nowaTab[i] = tab[i];
+	}
+	for (int i=(miejsce-1); i<wielkosc; i++) {
+	  int k=miejsce;
+	  nowaTab[i]=tab[k];
+	  ++k;
+	}
+	delete []tab;
+	tab = nowaTab;
+      }
+    }
+    catch (outOfBoundsException) {
+      std::cout <<"Wyjście poza zakres, koniec "<< std::endl;
+    }
+  }
+
+
+
+    
+    template <class T> T Tablica <T>::wyswietl (int miejsce) {
+      return tab[miejsce-1];
+   }
+    
 
 #endif

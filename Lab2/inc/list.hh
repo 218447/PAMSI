@@ -17,8 +17,8 @@ public:
   int size ();
   List();
   ~List(); 
-  class outOfRangeException{};  
   int search (T element);
+  class outOfRangeException{};
 };	   
 template<class T> List<T>::List() {
   lista = new Tablica <T>;
@@ -28,38 +28,15 @@ template<class T>List<T>::~List() {
 }
 
 template<class T> void List<T>::add (T element, int position) {
-  try{
-    if (position < 1 || position > lista->rozmiar()) {
-      throw outOfRangeException();
-	}
     lista->dodaj(element, position);
-  }
-  catch (outOfRangeException) {
-    std::cout <<"Wyjście poza zakres listy w czasie dodawania" << std::endl;
-  }
 }
 
 template<class T>void List<T>::remove (int position) {
-    try{
-      if (position < 1 || position > lista->rozmiar()) {
-	throw outOfRangeException();
-      }
-      lista->usun(position);
-    }
-    catch (outOfRangeException) {
-      std::cout <<"Wyjście poza zakres listy w czasie usuwania" << std::endl;
-    }
-  }
+  lista->usun(position);
+}
 
 template<class T>T List<T>::get (int position) {
-  try{
-    if (position < 1 || position > lista->rozmiar()) {
-      throw outOfRangeException();
-    }
-    return lista->wyswietl(position);    }
-  catch (outOfRangeException) {
-    std::cout <<"Wyjście poza zakres listy w czasie wyswietlania" << std::endl;
-  }
+  return lista->wyswietl(position);
 }
 
 template<class T> int List<T>::size () {

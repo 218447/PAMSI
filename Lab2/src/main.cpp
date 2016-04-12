@@ -5,9 +5,9 @@ int main () {
   Stoper *stoper = new Stoper;
   List<int> *lista = new List<int>;
   srand (time(NULL));
-  int ilosc=1000000;
+  int ilosc=1000;
   stoper->start();
-  for (int a=0; a<ilosc; a++) {
+  for (int a=1; a<ilosc; a++) {
     lista->add(rand() % ilosc, a);
   }
   stoper->stop();
