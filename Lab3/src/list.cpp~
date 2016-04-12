@@ -1,0 +1,46 @@
+#include "list.hh"
+
+template<class T> T List::List() {
+  lista = new Tablica <T>;
+}
+template<class T> T List::~List() {
+  delete[] lista;
+}
+template<class T> void List::add (T element, int position) {
+  try{
+    if (position < 1 || position > lista->rozmiar()) {
+      throw outOfRangeException;
+	}
+    lista->dodaj(element, position);
+  }
+  catch (outOfRangeException) {
+    std::cout <<"Wyjście poza zakres listy" << std::endl;
+  }
+  template<class T> void List::remove (int position) {
+try{
+  if (position < 1 || position > lista->rozmiar()) {
+      throw outOfRangeException;
+	}
+    lista->usun(position);
+  }
+  catch (outOfRangeException) {
+    std::cout <<"Wyjście poza zakres listy" << std::endl;
+  }
+ template<class T> T List::get (int position) {
+   return lista->wyswietl(position);
+}
+ template<class T> int List::size () {
+   lista->rozmiar();
+ }
+ template<class T> int List::search (T element) {
+   int position;
+   for (int a=0; a<lista->rozmiar(); a++) {
+     T checker = get(a);
+     if (element==checker){
+     position=a;
+     }
+   }
+     if (position>0) {
+       return position;
+     } else return 0;
+ }
