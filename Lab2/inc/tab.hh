@@ -118,7 +118,7 @@ template <class T> void Tablica<T>::dodaj (T& element, int miejsce) {
     } else {
       if (miejsce==1) {
 	T* nowaTab = new T[wielkosc*2];
-	wielkosc+=1;
+	wielkosc*=1;
 	nowaTab[miejsce-1]=element;
 	for (int i=(miejsce); i<wielkosc; i++) {
 	  nowaTab[i]=tab[i-1];
