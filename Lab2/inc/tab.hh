@@ -117,46 +117,29 @@ template <class T> void Tablica<T>::dodaj (T& element, int miejsce) {
       throw outOfBoundsException();
     } else {
       if (miejsce==1) {
-	T* nowaTab = new T[wielkosc+1];
+	T* nowaTab = new T[wielkosc*2];
 	wielkosc+=1;
 	nowaTab[miejsce-1]=element;
 	for (int i=(miejsce); i<wielkosc; i++) {
-	  int k=miejsce-1;
-	  nowaTab[i]=tab[k];
-	  ++k;
+	  nowaTab[i]=tab[i-1];
 	}
 	delete []tab;
 	tab=nowaTab;
-      }else if (miejsce == wielkosc || zajete==wielkosc) {
+      }else {
 	++zajete;
 	T* nowaTab = new T[wielkosc*2];
 	wielkosc*=2;
 	for (int i=0; i<=(miejsce-2); i++) {
-      nowaTab[i] = tab[i];
+	  nowaTab[i] = tab[i];
 	}
 	nowaTab[miejsce-1]=element;
-	for (int i=(miejsce); i<wielkosc; i++) {
-	  int k=miejsce-1;
-	  nowaTab[i]=tab[k];
-	  ++k;
-	}
-	delete []tab;
-	tab=nowaTab;
-      } else {
-	T* nowaTab = new T[wielkosc];
-	for (int i=0; i<=miejsce-2; i++) {
-	  nowaTab[i]=tab[i];
-	} 
-	nowaTab[miejsce-1] = element;
 	for (int i=miejsce; i<wielkosc; i++) {
-	  int k=miejsce-1;
-	  nowaTab[i]=tab[k];
-	  ++k;
-	} 
+	  nowaTab[i]=tab[i-1];
+	}
 	delete []tab;
 	tab=nowaTab;
       }
-    }  
+    }
   }
   catch (outOfBoundsException) {
     std::cout << "zły indeks"<<std::endl;
