@@ -12,9 +12,12 @@ int main()
 	for(int i=1; i<=n; i++)
 		lista->add(i, i);
 	
+	for(int i=1; i<=n; i++)
+		cout<<i<<". "<<lista->get(i)<<endl;
+	
 	lista->add(22, 2);
 	
-	for(int i=1; i<=n; i++)
+	for(int i=1; i<=n+1; i++)
 		cout<<i<<". "<<lista->get(i)<<endl;
 	
 	
