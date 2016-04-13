@@ -1,0 +1,15 @@
+#include "list.hh"
+#include <cstdlib>
+int main () {
+  List<int> *lista = new List<int>;
+  srand (time(NULL));
+  for (int a=0; a<20; a++) {
+    lista->add(rand(), a);
+  }
+  int pozycja=lista->search(4);
+  if(pozycja==0) {
+    std::cout << "Element nie znajduje sie na liście." << std::endl;
+  } else std::cout << "Element znajduje sie na miejscu:" << pozycja << std::endl;
+}
+
+  
