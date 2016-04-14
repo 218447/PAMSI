@@ -36,7 +36,7 @@ public:
   virtual void dodajElemPlus (const T &elem); //dodawanie elementu, powiekszanie o 100 w przypadku braku wolnego miejsca
   virtual void dodajElemRazy (const T &elem); //dodawanie elementu, powiekszanie razy 2 w przypadku braku wolnego miejsca
   virtual int rozmiar ();                       //zwraca wielkosc tablicy
-  virtual void dodaj (T& element, int miejsce);
+  virtual void dodaj (T element, int miejsce);
   virtual void usun (int miejsce);
   virtual T wyswietl (int miejsce);
   class outOfBoundsException {};
@@ -111,41 +111,53 @@ template <class T> int Tablica<T>::rozmiar() {
     return wielkosc;
   }
 
-template <class T> void Tablica<T>::dodaj (T& element, int miejsce) {
+template <class T> void Tablica<T>::dodaj (T element, int miejsce) {
   try {
     if (miejsce > wielkosc || miejsce <= 0) {
       throw outOfBoundsException();
     } else {
+      ++zajete;
       if (miejsce==1) {
-	T* nowaTab = new T[wielkosc*2];
-	wielkosc*=1;
-	nowaTab[miejsce-1]=element;
-	for (int i=(miejsce); i<wielkosc; i++) {
-	  nowaTab[i]=tab[i-1];
-	}
-	delete []tab;
-	tab=nowaTab;
-      }else {
-	++zajete;
-	T* nowaTab = new T[wielkosc*2];
-	wielkosc*=2;
-	for (int i=0; i<=(miejsce-2); i++) {
-	  nowaTab[i] = tab[i];
-	}
+	T* nowaTab = new T[wielkosc+1];
+	wielkosc+=1;
 	nowaTab[miejsce-1]=element;
 	for (int i=miejsce; i<wielkosc; i++) {
 	  nowaTab[i]=tab[i-1];
 	}
 	delete []tab;
-	tab=nowaTab;
+	tab = nowaTab;
+      } else if (zajete==wielkosc) {
+	  T* nowaTab = new T[wielkosc*2];
+	  wielkosc*=2;
+	  for (int i=0; i<(miejsce-2); i++) {
+	    nowaTab[i] = tab[i];
+	  }
+	  nowaTab[miejsce-1] = element;
+	  for (int i = miejsce; i<wielkosc; i++) {
+	    nowaTab[i]=tab[i-1];
+	  }
+	  delete []tab;
+	  tab = nowaTab;
+	} else {
+	  T* nowaTab = new T[wielkosc];
+	  for (int i = 0; i<(miejsce-2); i++) {
+	    nowaTab[i] = tab[i];
+	  }
+	  
+	  nowaTab[miejsce-1]=element;
+	  for (int i=miejsce; i<wielkosc; i++) {
+	    nowaTab[i]=tab[i-1];
+	  }
+	  delete []tab;
+	  tab=nowaTab;
       }
     }
   }
-  catch (outOfBoundsException) {
-    std::cout << "zły indeks"<<std::endl;
-    exit(1);
+    catch (outOfBoundsException) {
+      std::cout << "zły indeks"<<std::endl;
+      exit(1);
+    }
   }
-}
 
   template <class T> void Tablica <T>::usun (int miejsce) {
     try {
