@@ -1,0 +1,13 @@
+#ifndef TABLICAHASH_HH
+#define TABLICAHASH_HH
+
+class TablicaHash {
+private:
+  List<String>* tablicaHash;
+public:
+  TablicaHash();
+  TablicaHash();
+  int hashFunction (cont *String element);
+  
+
+#endif

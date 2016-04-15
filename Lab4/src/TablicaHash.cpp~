@@ -1,0 +1,29 @@
+#include "TablicaHash.hh"
+
+TablicaHash::TablicaHash(const &int initialSize) {
+  //stworzenie tablicy hashujacej
+  tablicaHash = new List<String>[initialSize];
+  size = tablicaHash->getSize();
+}
+
+~TablicaHash::~TablicaHash() {
+  delete [] tablicaHash;
+}
+
+int TablicaHash::hashFunction (const  element) {
+    key++;
+    return key % keyMax;
+}
+
+int getSize () {
+  return keyMax;
+}
+
+void addElement (const &String addedElement, const &int key) {
+  int uniqueKey = hashFunction;
+  tablicaHash[uniqueKey]->add(addedElement);
+}
+
+String getElement (const &int searchedKey) {
+  try {
+    if 
