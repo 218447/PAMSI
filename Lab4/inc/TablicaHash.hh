@@ -1,16 +1,20 @@
 #ifndef TABLICAHASH_HH
 #define TABLICAHASH_HH
 
-#include "List.hh"
+#include "list.hh"
+#include <string>
 
 class TablicaHash {
 private:
-  List<String>* tablicaHash;
+  Tablica<List<listElement>>* tablicaHash;
   size;
 public:
   TablicaHash(const int initialSize);
   ~TablicaHash();
-  int hashFunction (cont *String element);
+  int hashFunction (const *std::string element);
   int getSize();
+  int getElement(const &listElement key);
+  void addElement(const &listElement element);
+};
 
 #endif

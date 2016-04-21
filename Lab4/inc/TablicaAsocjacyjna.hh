@@ -2,19 +2,18 @@
 #define TABLICAASOCJACYJNA_HH
 
 #include <iostream>
-#include <String>
+#include <string>
 #include "TablicaHash.hh"
+#include <fstream>
 
 class TablicaAsocjacyjna {
 private:
   TablicaHash* tablicaAsocjacyjna;
 public:
-  TablicaAsocjacyjna();
+  TablicaAsocjacyjna(const &int size);
   ~TablicaAsocjacyjna();
-  String operator (const int* klucz);
-  void operator = (int *bucket, const string* element);
-  getSize();
+  int getSize();
+  void add(const char* fileName);
 };
 
 #endif
-x

@@ -1,13 +1,15 @@
 #ifndef LISTELEMENT_HH
 #define LISTELEMENT_HH
 
+#include <string>
+
 struct listElement {
 private:
-  string key;
+  std::string key;
   int value;
 
 public:
-  int getKey() {
+  std::string getKey() {
     return key;
   };
   int getValue() {

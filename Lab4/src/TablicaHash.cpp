@@ -18,8 +18,9 @@ int getSize () {
   return size;
 }
 
-void addElement (const &String key, const &int element) {
-  int uniqueKey = hashFunction (key);
+void addElement (const &listElement element) {
+  size++;
+  int uniqueKey = hashFunction (element.key);
   tablicaHash[uniqueKey]->add(element);
 }
 
