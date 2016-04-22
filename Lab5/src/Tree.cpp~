@@ -1,0 +1,17 @@
+#include "Tree.hh"
+
+Tree() {
+  Tree = new Tablica();
+}
+
+~Tree() {
+  delete Tree;
+}
+
+bool add (int& element) {
+
+}
+
+int find (const int* searched) {
+
+}

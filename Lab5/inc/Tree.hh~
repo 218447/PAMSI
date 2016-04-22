@@ -1,0 +1,18 @@
+#ifndef "TREE_HH"
+#define "TREE_HH"
+
+class Tree {
+
+private:
+  Tablica *Drzewo;
+
+public:
+  Tree ();
+  ~Tree();
+  bool add(int element);
+  int find(int searched);
+  class noAddExcpetion {};
+};
+
+#endif
+
