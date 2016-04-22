@@ -13,7 +13,7 @@ obj/Tree.o: src/Tree.cpp inc/Tree.hh inc/tab.hh
 	g++ -c ${FLAGS} -o obj/Tree.o src/Tree.cpp
 
 obj/stoper.o: src/stoper.cpp inc/stoper.hh
-	g++ -c ${FLAGS} -o obj stoper.o src/stoper.cpp
+	g++ -c ${FLAGS} -o obj/stoper.o src/stoper.cpp
 
 clean:
 	rm -f core* TREE obj/*

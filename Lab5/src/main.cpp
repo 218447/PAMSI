@@ -7,14 +7,15 @@ int main () {
   Stoper stoper;
   int found;  //zmienna sprawdzajaca czy znaleziono element
   int seeked; //zmienna, ktora szukamy
-  double czas[2];
-  
+  double *czas;
+  std::ifstream file ("liscie_10"); 
+
   stoper.start();
-  Drzewo >> "li¶cie_10";
+  file >> Drzewo;
   stoper.stop();
   
   stoper.start();
-  seek = Tree.find(seeked);
+  seeked = Drzewo->find(seeked);
   stoper.stop();
 
   if (seeked == found) {

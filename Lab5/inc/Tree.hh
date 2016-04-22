@@ -1,5 +1,5 @@
-#ifndef "TREE_HH"
-#define "TREE_HH"
+#ifndef TREE_HH
+#define TREE_HH
 
 #include "tab.hh"
 #include <fstream>
@@ -8,15 +8,16 @@
 class Tree {
 
 private:
-  Tablica *Tree;
+  Tablica<int> *tree;
 
 public:
   Tree ();
   ~Tree();
-  void add(int element);
-  int find(int searched);
-  bool operator >> (const char* name);
+  void add(int& element);
+  int find(const int& searched);
 };
+
+std::istream &operator >> (std::istream& in, Tree* drzewo);
 
 #endif
 

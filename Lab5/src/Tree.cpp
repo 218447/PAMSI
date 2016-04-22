@@ -1,23 +1,23 @@
 #include "Tree.hh"
 
-Tree() {
-  Tree = new Tablica()<int>;
+Tree::Tree() {
+  tree = new Tablica<int>;
 }
 
-~Tree() {
-  delete Tree;
+Tree::~Tree() {
+  delete tree;
 }
 
-void add (int& element) {
-  if (Tree[0]=null) {
-    Tree.dodaj(element, 0);
+void Tree::add (int& element) {
+  if (tree==NULL) {
+    tree->dodaj(element, 0);
   } else {
-    for (int i=0;i < Tree.rozmiar(); i++) {
-      if (Tree[i]) {
-	if (element < Tree[i]) {
-	  Tree.dodaj(element, 2*i);
+    for (int i=0;i < tree->rozmiar(); i++) {
+      if (tree->wyswietl(i) != NULL) {
+	if (element < tree->wyswietl(i) ) {
+	  tree->dodaj(element, 2*i);
 	} else {
-	  Tree.dodaj(element, (2*i)+1 )
+	  tree->dodaj(element, (2*i)+1 );
 	    }
       }
     }
@@ -25,17 +25,17 @@ void add (int& element) {
 }
 
 
-int find (const int* searched) {
+int Tree::find (const int& searched) {
   bool found;
-  int foundVerification = null;
-  for (int i = 0; i < Tree.rozmiar() i || Tree[i] == searched ; ) {
-    if (Tree[i] == searched) {
+  int foundVerification = NULL;
+  for (int i = 0; i < tree->rozmiar() || tree->wyswietl(i) == searched ; ) {
+    if (tree->wyswietl(i) == searched) {
       found=true;
-      foundVerification = Tree[i];
+      foundVerification = tree->wyswietl(i);
     }
     
-    if (searched < Tree[i]) {
-      i* = 2;
+    if (searched < tree->wyswietl(i)) {
+      i *= 2;
     } else {
       i = (i*2) + 1;
     }
@@ -45,16 +45,11 @@ int find (const int* searched) {
   } else return 0;
 }
 
-bool operator >> (const char* name) {
-  ifstream file;
+std::istream &operator >> (std::istream& in, Tree* drzewo) {
   int element;
   
-  if (file.good() == true) {
-    while (!file.fail() ) {
-      file >> element;
-      add(element);
-    }
+  while(in >> element) {
+    drzewo->add(element);
   }
-  
 }
 
