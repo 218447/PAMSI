@@ -4,6 +4,7 @@
 #include <cstdlib>
 #include <iostream>
 #include <cstring>
+#include "list.hh"
 
 /* Deklaracja klasy tablica, przechowującej dynamicznie obiekty typu integer.
 Zmienne prywatne:
@@ -38,6 +39,8 @@ public:
   virtual void usun (int miejsce);
   virtual T wyswietl (int miejsce);
   class outOfBoundsException {};
+  List<T> operator [] (Tablica<T>, int k)
+
 };
 
 
@@ -189,6 +192,9 @@ template <class T> void Tablica<T>::dodaj (T& element, int miejsce) {
     template <class T> T Tablica <T>::wyswietl (int miejsce) {
       return tab[miejsce-1];
    }
-    
+
+template <class T> List<T> Tablica<T>::operator [] (Tablica<T>, int k) {
+  return Tablica<T>[k];
+}   
 
 #endif

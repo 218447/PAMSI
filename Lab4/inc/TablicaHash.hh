@@ -2,19 +2,19 @@
 #define TABLICAHASH_HH
 
 #include "list.hh"
-#include <string>
+#include <cstdlib>
 
 class TablicaHash {
 private:
   Tablica<List<listElement>>* tablicaHash;
-  size;
+  int size;
 public:
-  TablicaHash(const int initialSize);
+  TablicaHash(const int & initialSize);
   ~TablicaHash();
-  int hashFunction (const *std::string element);
+  int hashFunction (std::string& element);
   int getSize();
-  int getElement(const &listElement key);
-  void addElement(const &listElement element);
+  int getElement(std::string& key);
+  void addElement(listElement& element);
 };
 
 #endif

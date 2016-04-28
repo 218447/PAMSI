@@ -1,6 +1,6 @@
 #include "TablicaAsocjacyjna.hh"
 
-TablicaAsocjacyjna::TablicaAsocjacyjna(const &int size) {
+TablicaAsocjacyjna::TablicaAsocjacyjna(const int& size) {
   tablicaAsocjacyjna = new TablicaHash(size);
 }
 
@@ -8,25 +8,22 @@ TablicaAsocjacyjna::~TablicaAsocjacyjna() {
   delete tablicaAsocjacyjna;
 }
 
-void TablicaAsocjacyjna::add (const char *fileName) {
-  ifstream fileStream (fileName);
-  
-  if (fileStream.is_open()) {
-    std::cout << "Nie powiedło się otwarcie pliku: " << fileName << std::endl;
-    return false;
+void TablicaAsocjacyjna::add (listElement& elem) {
+  tablicaAsocjacyjna->addElement(elem);
   }
-  
-  int sizeOfFile;
-  listElement element;
-  
-  fileStream >> sizeOfFile;
-  
-  for (int i = 0; i < sizeOfFile; i++) {
-    fileStream >> element;
-    tablicaAsocjacyjna->addElement(element);
+
+std::istream &operator >> (std::istream& in, TablicaAsocjacyjna* tab) {
+  int element;
+  std::string key;
+  listElement EL;
+
+  while (in >> element || in >> key) {
+    EL.value=element;
+    EL.key=key;
+   tab->add(EL);
   }
 }
 
 int TablicaAsocjacyjna::getSize() {
-  return tablicaAsocjacyjna->size();
+  return tablicaAsocjacyjna->getSize();
 }

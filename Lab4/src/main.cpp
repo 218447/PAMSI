@@ -2,10 +2,11 @@
 #include "stoper.hh"
 
 int main() {
-  TablicaAsocjacyjna* tab = new TablicaAsocjacyjna;
+  TablicaAsocjacyjna* tab = new TablicaAsocjacyjna(10);
   Stoper stoper;
+  std::ifstream file ("Aso_10"); 
 
   stoper.start();
-  tab.get("TabAso10");
+  file >> tab;
   stoper.stop();
 }

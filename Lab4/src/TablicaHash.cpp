@@ -1,30 +1,30 @@
 #include "TablicaHash.hh"
 
-TablicaHash::TablicaHash(const &int initialSize) {
+TablicaHash::TablicaHash(const int& initialSize) {
   //stworzenie tablicy hashujacej
-  tablicaHash = new List<listElement>[initialSize];
-  size = tablicaHash->getSize();
+  tablicaHash = new Tablica<List<listElement>>[initialSize];
+  size = tablicaHash->rozmiar();
 }
 
-~TablicaHash::~TablicaHash() {
+TablicaHash::~TablicaHash() {
   delete [] tablicaHash;
 }
 
-int TablicaHash::hashFunction (String& hashedKey) {
-    return hashedKey % size;
+int TablicaHash::hashFunction (std::string& hashedKey) {
+  return atoi(hashedKey.c_str()) % size;
 }
 
-int getSize () {
+int TablicaHash::getSize () {
   return size;
 }
 
-void addElement (const &listElement element) {
+void TablicaHash::addElement (listElement& element) {
   size++;
   int uniqueKey = hashFunction (element.key);
-  tablicaHash[uniqueKey]->add(element);
+  tablicaHash[uniqueKey].add(element, getSize() );
 }
 
-String getElement (const &String key) {
-  hashedKey = hashFunction (key);
-  return tablica[hashedKey]->search(key);
+int TablicaHash::getElement ( std::string& key) {
+  int hashedKey = hashFunction (key);
+  return tablicaHash[hashedKey].search(key);
 }

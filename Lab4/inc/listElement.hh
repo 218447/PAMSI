@@ -4,7 +4,7 @@
 #include <string>
 
 struct listElement {
-private:
+public:
   std::string key;
   int value;
 
@@ -16,5 +16,6 @@ public:
     return value;
   };
 };
+
 
 #endif
