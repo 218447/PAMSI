@@ -18,7 +18,7 @@ public:
   int size ();
   List();
   ~List(); 
-  int search (const int & key);
+  int search (const std::string& key);
   class outOfRangeException{};
 };	   
 template<class T> List<T>::List() {
@@ -44,11 +44,11 @@ template<class T> int List<T>::size () {
       return lista->rozmiar();
 }
 
-template<class T> int List<T>::search (const int & key) {
+template<class T> int List<T>::search (const std::string& key) {
   for (int a=0; a<lista->rozmiar(); a++) {
-    int checker = get(a);
-    if (key==checker){
-      return checker;
+    list checker = get(a);
+    if (key==checker.getKey()){
+      return checker.getValue;
     }
   }
 }

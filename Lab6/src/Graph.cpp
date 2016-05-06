@@ -3,7 +3,6 @@
 Graph::Graph (char* inputGraph) {
 
   std::ifstream file (inputGraph);
-  int element;
   int amountOfVertices;
   int amountOfEdges;
   int vertex1;
@@ -12,27 +11,32 @@ Graph::Graph (char* inputGraph) {
   file >> amountOfVertices;
   file >> amountOfEdges;
 
-  listOfAdjacency = new Tablica [amountOfVertices-1];
+  listOfAdjacency = new Tablica<List<int>> [amountOfVertices-1];
   
-  while(!END_OF_FILE) {
+  while(vertex1 || vertex2) {
     file >> vertex1;
     file >> vertex2;
 
-    listOfAdjacency->addEdge(vertex1, vertex2);
+    addEdge(vertex1, vertex2);
 
   }
 }
 
+Graph::~Graph() {
+  delete listOfAdjacency;
+}
+
 void Graph::addVertex (int Vertex) {
-  listOfAdjacency->dodajElemRazy(Vertex)
+  List<int>* vertex = new List<int>();
+  listOfAdjacency->dodajElemRazy(vertex);
     }
 
 void Graph::addEdge (int vertex1, int vertex2) {
-  listOfAdjecency[vertex1]->add (vertex2, listOfAdjecency.getSize+1);
-  listOfAdjecency[vertex2]->add (vertex1, listOfAdjecency.getSize+1);
+  listOfAdjacency[vertex1]->add (vertex2, listOfAdjacency->getSize+1);
+  listOfAdjacency[vertex2]->add (vertex1, listOfAdjacency->getSize+1);
 }
 
-int[] Graph::getNeighbours (int Vertex) {
+int* Graph::getNeighbours (int Vertex) {
   int Neighbours = listOfAdjecency[Vertex]->getSize();
 
   for (int i=0; i<listOfAdjecency->getSize(); i++) {

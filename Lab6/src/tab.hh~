@@ -4,7 +4,6 @@
 #include <cstdlib>
 #include <iostream>
 #include <cstring>
-#include "list.hh"
 
 /* Deklaracja klasy tablica, przechowującej dynamicznie obiekty typu integer.
 Zmienne prywatne:
@@ -33,14 +32,12 @@ public:
   Tablica (const Tablica & tabl);         //konstruktor kopiujacy
   virtual void dodajElem (const T &elem);     //dodawanie elementu, powiekszanie o 1 w przypadku braku wolnego miejsca
   virtual void dodajElemPlus (const T &elem); //dodawanie elementu, powiekszanie o 100 w przypadku braku wolnego miejsca
-  virtual void dodajElemRazy (const T &elem); //dodawanie elementu, powiekszanie razy 2 w przypadku braku wolnego miejsca
+  virtual void dodajElemRazy ( T &elem); //dodawanie elementu, powiekszanie razy 2 w przypadku braku wolnego miejsca
   virtual int rozmiar ();                       //zwraca wielkosc tablicy
    virtual void dodaj (T& element, int miejsce);
   virtual void usun (int miejsce);
   virtual T wyswietl (int miejsce);
   class outOfBoundsException {};
-  auto operator [] ( int k);
-
 };
 
 
@@ -95,7 +92,7 @@ template <class T> void Tablica<T>::dodajElemPlus (const T &elem) {
     tab = nowaTab;
   } else tab [zajete-1] = elem;
 }
-template <class T> void Tablica<T>::dodajElemRazy (const T &elem) {
+template <class T> void Tablica<T>::dodajElemRazy ( T &elem) {
   ++zajete;
   if (zajete>wielkosc) {
     T* nowaTab = new T[zajete*2];
@@ -192,9 +189,6 @@ template <class T> void Tablica<T>::dodaj (T& element, int miejsce) {
     template <class T> T Tablica <T>::wyswietl (int miejsce) {
       return tab[miejsce-1];
    }
-
-template <class T> auto Tablica<T>::operator [] ( int k) {
-  return tab[k];
-}   
+    
 
 #endif
