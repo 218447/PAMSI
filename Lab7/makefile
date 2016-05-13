@@ -1,0 +1,32 @@
+FLAGS = -Iinc -pedantic -Wall -std=c++11
+
+__start__: obj B&B
+	rm -f core*; ./B&B
+
+B&B: obj/main.o obj/Graph.o obj/stoper.o obj/list.o obj/tab.o
+	g++ -o B&B obj/main.o obj/Graph.o obj/stoper.o obj/list.o obj/tab.o
+
+obj/main.o: src/main.cpp inc/stoper.hh inc/Graph.hh
+	g++ -c ${FLAGS} -o obj/main.o src/main.cpp
+
+obj/Graph.o: src/Graph.cpp inc/Graph.hh inc/IGraph.hh inc/list.hh
+	g++ -c ${FLAGS} -o obj/Graph.o src/Graph.cpp
+
+obj/stoper.o: src/stoper.cpp inc/stoper.hh
+	g++ -c ${FLAGS} -o obj/stoper.o src/stoper.cpp
+
+obj/list.o: src/list.cpp inc/list.hh inc/tab.hh
+	g++ -c ${FLAGS} obj/list.o src/list.cpp
+
+obj/tab.o: src/tab.cpp inc/tab.hh
+	g++ -c ${FLAGS} -o obj/tab.o src/tab.cpp
+
+clean:
+	rm -f core* TREE obj/*
+
+remake:
+	rm -f core* TREE obj/*
+	make
+
+obj:
+	mkdir obj
