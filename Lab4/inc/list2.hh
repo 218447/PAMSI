@@ -3,6 +3,7 @@
 
 #include "tab.hh"
 #include "listElement.hh"
+#include <string>
 
 /* Klasa implementuj±ca listê */
 
@@ -45,14 +46,12 @@ template<class T> int List<T>::size () {
 }
 
 template<class T> int List<T>::search (const std::string& key) {
-  for (int a=1; a<lista->rozmiar(); a++) {
+  for (int a=0; a<lista->rozmiar(); a++) {
     listElement checker = get(a);
     if (key==checker.getKey()){
-      std::cout <<"ZYJE"<<std::endl;
+      return checker.getValue;
     }
   }
 }
-
-
 
 #endif

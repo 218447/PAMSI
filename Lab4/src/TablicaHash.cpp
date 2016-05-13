@@ -2,8 +2,8 @@
 
 TablicaHash::TablicaHash(const int& initialSize) {
   //stworzenie tablicy hashujacej
-  tablicaHash = new Tablica<List<listElement>>[initialSize];
-  size = tablicaHash->rozmiar();
+  tablicaHash = new List<listElement>[initialSize];
+  sizeOfBuckets = initialSize;
 }
 
 TablicaHash::~TablicaHash() {
@@ -11,7 +11,7 @@ TablicaHash::~TablicaHash() {
 }
 
 int TablicaHash::hashFunction (std::string& hashedKey) {
-  return atoi(hashedKey.c_str()) % size;
+  return atoi(hashedKey.c_str()) % sizeOfBuckets;
 }
 
 int TablicaHash::getSize () {
@@ -19,12 +19,14 @@ int TablicaHash::getSize () {
 }
 
 void TablicaHash::addElement (listElement& element) {
-  size++;
   int uniqueKey = hashFunction (element.key);
-  tablicaHash[uniqueKey].add(element, getSize() );
+  tablicaHash[uniqueKey].add(element, size);
+  ++size;
 }
 
 int TablicaHash::getElement ( std::string& key) {
   int hashedKey = hashFunction (key);
   return tablicaHash[hashedKey].search(key);
 }
+
+

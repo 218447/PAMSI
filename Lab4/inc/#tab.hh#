@@ -4,16 +4,15 @@
 #include <cstdlib>
 #include <iostream>
 #include <cstring>
-
+#include "list.hh"
+#include "listElement.hh"
 
 /* Deklaracja klasy tablica, przechowującej dynamicznie obiekty typu integer.
 Zmienne prywatne:
 wielkosc - wielkosc tablicy, definiowana w konstruktorze
 zajete - liczba wykorzystanych komorek tablicy
 *tab - zmienna przechowujaca komorki tablicy
-
 Metody:
-
 Tablica - konstruktor
 ~Tablica - destruktor
 dodajElem - metoda dodajaca jeden element do tablicy
@@ -37,16 +36,12 @@ public:
   virtual void dodajElemPlus (const T &elem); //dodawanie elementu, powiekszanie o 100 w przypadku braku wolnego miejsca
   virtual void dodajElemRazy (const T &elem); //dodawanie elementu, powiekszanie razy 2 w przypadku braku wolnego miejsca
   virtual int rozmiar ();                       //zwraca wielkosc tablicy
-  virtual void dodaj (T& element, int miejsce);
+   virtual void dodaj (listElement& element, int miejsce);
   virtual void usun (int miejsce);
   virtual T wyswietl (int miejsce);
   class outOfBoundsException {};
-<<<<<<< HEAD
-  Tablica<T> operator [] ( int k);
-=======
-  auto operator [] ( int k);
+  int search (const std::string& key);
 
->>>>>>> c1ae83fa69278f017d5c631547d14ac8e84a9253
 };
 
 
@@ -118,14 +113,14 @@ template <class T> int Tablica<T>::rozmiar() {
     return wielkosc;
   }
 
-template <class T> void Tablica<T>::dodaj (T& element, int miejsce) {
+template <class T> void Tablica<T>::dodaj (listElement& element, int miejsce) {
  try {
     if (miejsce > wielkosc || miejsce <= 0) {
       throw outOfBoundsException();
     } else {
       if (miejsce==1) {
 	++zajete;
-	T* nowaTab = new T[wielkosc+1];
+	listElement* nowaTab = new listElement[wielkosc+1];
 	wielkosc+=1;
 	nowaTab[miejsce-1]=element;
 	for (int i=(miejsce); i<wielkosc; i++) {
@@ -166,7 +161,6 @@ template <class T> void Tablica<T>::dodaj (T& element, int miejsce) {
     exit(1);
   }
   }
- 
 
   template <class T> void Tablica <T>::usun (int miejsce) {
     try {
@@ -199,16 +193,16 @@ template <class T> void Tablica<T>::dodaj (T& element, int miejsce) {
     template <class T> T Tablica <T>::wyswietl (int miejsce) {
       return tab[miejsce-1];
    }
-<<<<<<< HEAD
-    
-template <class T> Tablica<T> Tablica<T>::operator [] ( int k) {
-  return tab[k];
-}
-=======
 
-template <class T> auto Tablica<T>::operator [] ( int k) {
-  return tab[k];
-}   
->>>>>>> c1ae83fa69278f017d5c631547d14ac8e84a9253
+ 
+
+template<class T> int Tablica<T>::search (const std::string& key) {
+  for (int a=0; a<tab->rozmiar(); a++) {
+    listElement checker = wyswietl(a);
+    if (key==checker.getKey()){
+      return checker.getValue;
+    }
+  }
+}
 
 #endif

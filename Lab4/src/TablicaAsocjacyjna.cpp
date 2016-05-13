@@ -16,7 +16,6 @@ std::istream &operator >> (std::istream& in, TablicaAsocjacyjna* tab) {
   int element;
   std::string key;
   listElement EL;
-
   while (in >> element || in >> key) {
     EL.value=element;
     EL.key=key;
@@ -26,4 +25,8 @@ std::istream &operator >> (std::istream& in, TablicaAsocjacyjna* tab) {
 
 int TablicaAsocjacyjna::getSize() {
   return tablicaAsocjacyjna->getSize();
+}
+
+int TablicaAsocjacyjna::get(std::string& key) {
+  return tablicaAsocjacyjna->getElement(key);
 }

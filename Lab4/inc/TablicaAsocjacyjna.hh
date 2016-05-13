@@ -13,6 +13,7 @@ public:
   ~TablicaAsocjacyjna();
   int getSize();
   void add(listElement & elem);
+  int get(std::string& key);
 };
 std::istream &operator >> (std::istream& in, TablicaAsocjacyjna* tab);
 #endif

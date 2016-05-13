@@ -2,12 +2,14 @@
 #define TABLICAHASH_HH
 
 #include "list.hh"
+#include "listElement.hh"
 #include <cstdlib>
 
 class TablicaHash {
 private:
-  Tablica<List<listElement>>* tablicaHash;
-  int size;
+  List<listElement>* tablicaHash;
+  int sizeOfBuckets;
+  int size = 1;
 public:
   TablicaHash(const int & initialSize);
   ~TablicaHash();
@@ -15,6 +17,7 @@ public:
   int getSize();
   int getElement(std::string& key);
   void addElement(listElement& element);
+
 };
 
 #endif
