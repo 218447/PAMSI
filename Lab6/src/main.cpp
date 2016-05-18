@@ -1,11 +1,30 @@
-#include "Graph.hh"
 #include <iostream>
+#include <fstream>
+#include "BFS.hh"
+#include "stoper.hh"
+
+// Realizacja przeszukania grafu BFS - zaczynamy od wierzcho³ka 2.
+ 
+
+using namespace std;
 
 int main() {
-  char* fileWithGraph = "Graf";
-  Graph* graf = new Graph(fileWithGraph);
+  Graph_BFS* graf = new Graph_BFS(1000000);
   int* neighbours;
+  Stoper stoper;
+  std::ifstream file ("Graf_1000000"); 
+  double *czas;
+
+  file >> graf;
+
+  std::cout << "Graf wczytano" << std::endl;
+
+  stoper.start();
+  graf->BFS(2);
+  stoper.stop();
+
+  czas = stoper.wyswietl();
+
+  std::cout << "Czas przeszukiwania BFS wynosi: " << czas[0] << std::endl;
   
-  neighbours = graf->getNeighbours (0);
-  std::cout << "Sasiedzi wierzcholka nr 0 to: " << neighbours << std::endl;
 }
