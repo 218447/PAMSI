@@ -2,7 +2,6 @@
 #define LIST_HH
 
 #include "tab.hh"
-#include <string>
 
 /* Klasa implementuj±ca listê */
 
@@ -18,7 +17,7 @@ public:
   int size ();
   List();
   ~List(); 
-  int search (const int & key);
+  int search (T element);
   class outOfRangeException{};
 };	   
 template<class T> List<T>::List() {
@@ -44,13 +43,19 @@ template<class T> int List<T>::size () {
       return lista->rozmiar();
 }
 
-template<class T> int List<T>::search (const int & key) {
+template<class T> int List<T>::search (T element) {
+  int position;
   for (int a=0; a<lista->rozmiar(); a++) {
-    int checker = get(a);
-    if (key==checker){
-      return checker;
-    }
+    T checker = get(a);
+    if (element==checker){
+      position=a+1;
+     }
   }
+  if (position>0) {
+       return position;
+  } else return 0;
 }
+
+
 
 #endif
