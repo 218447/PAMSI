@@ -34,9 +34,10 @@ public:
   virtual void dodajElemPlus (const T &elem); //dodawanie elementu, powiekszanie o 100 w przypadku braku wolnego miejsca
   virtual void dodajElemRazy (const T &elem); //dodawanie elementu, powiekszanie razy 2 w przypadku braku wolnego miejsca
   virtual int rozmiar ();                       //zwraca wielkosc tablicy
-   virtual void dodaj (T& element, int miejsce);
+  virtual void dodaj (const T& element, int miejsce);
   virtual void usun (int miejsce);
   virtual T wyswietl (int miejsce);
+  virtual bool szukaj (int szukany);
   class outOfBoundsException {};
 };
 
@@ -47,7 +48,7 @@ template <class T> Tablica<T>::Tablica (const int &rozmiar) {
   tab=new T[rozmiar];
 }
 template <class T> Tablica<T>::Tablica() {
-  wielkosc=10;
+  wielkosc=1;
   zajete=0;
   tab=new T[wielkosc];
 }
@@ -62,9 +63,10 @@ template <class T> Tablica<T>::~Tablica () {
 }
 template <class T> void Tablica<T>::Wyczysc () {
   delete []tab;
-  T* nowaTab = new T[10];
+  T* nowaTab = new T[1];
   tab= nowaTab;
 }
+
 template <class T> void Tablica<T>::dodajElem (const T &elem) {
   ++zajete;
   if (zajete>wielkosc) {
@@ -106,12 +108,12 @@ template <class T> void Tablica<T>::dodajElemRazy (const T &elem) {
   } else tab [zajete-1] = elem;
 }
 template <class T> int Tablica<T>::rozmiar() {
-    return wielkosc;
+    return zajete;
   }
 
-template <class T> void Tablica<T>::dodaj (T& element, int miejsce) {
+template <class T> void Tablica<T>::dodaj (const T& element, int miejsce) {
  try {
-    if (miejsce > wielkosc || miejsce <= 0) {
+    if ( miejsce < 0) {
       throw outOfBoundsException();
     } else {
       if (miejsce==1) {
@@ -189,6 +191,17 @@ template <class T> void Tablica<T>::dodaj (T& element, int miejsce) {
     template <class T> T Tablica <T>::wyswietl (int miejsce) {
       return tab[miejsce-1];
    }
-    
+
+template <class T> bool Tablica<T>::szukaj (int szukany) {
+  bool searched=false;
+  for (int i=1; i<=rozmiar(); i++)  {
+    if (wyswietl(i) == szukany) {
+      searched=true;
+      break;
+    }
+  }
+  return searched;
+}
+
 
 #endif

@@ -1,53 +1,66 @@
 #include "Graph.hh"
 
-Graph::Graph (char* inputGraph) {
+Graph::Graph (int amountOfVertices) {
+  amountOfMatrix = amountOfVertices;
+  matrix = new bool* [amountOfMatrix];    // Tworzymy tablicê wska¼ników
 
-  std::ifstream file (inputGraph);
-  int amountOfVertices;
-  int amountOfEdges;
-  int vertex1;
-  int vertex2;
+  for(int i = 0; i < amountOfMatrix; i++)
+    matrix[i] = new bool [amountOfMatrix]; // Tworzymy wiersze
+
+  // Macierz wype³niamy zerami
   
-  file >> amountOfVertices;
-  file >> amountOfEdges;
-
-  matrixOfAdjacency = new Tablica<int> (amountOfVertices-1)[amount of Edges-1];
-  
-  while(vertex1 || vertex2) {
-    file >> vertex1;
-    file >> vertex2;
-
-    addEdge(vertex1, vertex2);
-
+  for(int i = 0; i < amountOfMatrix; i++) {
+    for(int j = 0; j < amountOfMatrix; j++) {
+      matrix[i][j] = false;
+    }
   }
-}
+  }
+
 
 Graph::~Graph() {
-  delete []matrixOfAdjacency;
+  for(int i = 0; i < amountOfMatrix; i++) {
+    delete [] matrix[i];
+  }
+  delete [] matrix;
 }
 
 void Graph::addVertex (int Vertex) {
-  List<int>* vertex = new List<int>();
-  matrixOfAdjacency->dodajElemRazy(vertex);
     }
 
 void Graph::addEdge (int vertex1, int vertex2) {
-  matrixOfAdjacency[vertex1]->add (vertex2, matrixOfAdjacency->getSize()+1);
-  matrixOfAdjacency[vertex2]->add (vertex1, matrixOfAdjacency->getSize()+1);
+  matrix[vertex1][vertex2] = true;
+   matrix[vertex2][vertex1] = true;
+  
 }
 
 int* Graph::getNeighbours (int Vertex) {
-  int Neighbours = matrixOfAdjecency[Vertex]->getSize();
-
-  for (int i=0; i< matrixOfAdjecency->getSize(); i++) {
-    Neighbours[i] = matrixOfAdjecency[Vertex]->get(i);
+  int Neighbours[1000];
+  int counter = 0;
+  for (int i=0; i<amountOfMatrix; i++) {
+    if (matrix[Vertex][i] == true) {
+      Neighbours[counter] = i;
+      ++counter;
+    }
   }
   return Neighbours;
 }
 
-bool isConnected (int vertex1, int vertex2) {
-  int checker = martixOfAdjecency[vertex1]->search(vertex2);
-  if (vertex2==checker) {
-    return 1;
-  } else return 0;
+bool Graph::isConnected (int vertex1, int vertex2) {
+  bool checker = matrix[vertex1][vertex2];  
+  return checker;
 }
+
+std::istream & operator >> (std::istream & in, Graph* graf) {
+  int vertex1=1, vertex2=1;
+
+  while (true) {
+    in >> vertex1 >> vertex2;
+    if (in.good()) {
+      graf->addEdge (vertex1, vertex2);
+    } else {
+      break;
+      }       
+  } 
+  return in;
+}
+  

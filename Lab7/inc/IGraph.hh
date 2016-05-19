@@ -2,7 +2,6 @@
 #define IGRAPH_HH
 
 #include "tab.hh"
-#include "list.hh"
 
 class IGraph {
 public:

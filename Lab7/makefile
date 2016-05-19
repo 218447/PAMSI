@@ -1,31 +1,32 @@
 FLAGS = -Iinc -pedantic -Wall -std=c++11
 
-__start__: obj B&B
-	rm -f core*; ./B&B
+__start__: obj BAB
+	rm -f core*; ./BAB
 
-B&B: obj/main.o obj/Graph.o obj/stoper.o obj/list.o obj/tab.o
-	g++ -o B&B obj/main.o obj/Graph.o obj/stoper.o obj/list.o obj/tab.o
+BAB: obj/main.o obj/BAB.o obj/queue.o obj/tab.o obj/stoper.o
+	g++ -o BAB obj/main.o obj/BAB.o obj/queue.o  obj/tab.o\
+	           obj/stoper.o 
 
-obj/main.o: src/main.cpp inc/stoper.hh inc/Graph.hh
+obj/main.o: src/main.cpp inc/stoper.hh inc/BAB.hh 
 	g++ -c ${FLAGS} -o obj/main.o src/main.cpp
 
-obj/Graph.o: src/Graph.cpp inc/Graph.hh inc/IGraph.hh inc/list.hh
-	g++ -c ${FLAGS} -o obj/Graph.o src/Graph.cpp
+obj/BAB.o: src/BAB.cpp inc/BAB.hh inc/queue.hh
+	g++ -c ${FLAGS} -o obj/BAB.o src/BAB.cpp
 
-obj/stoper.o: src/stoper.cpp inc/stoper.hh
-	g++ -c ${FLAGS} -o obj/stoper.o src/stoper.cpp
-
-obj/list.o: src/list.cpp inc/list.hh inc/tab.hh
-	g++ -c ${FLAGS} obj/list.o src/list.cpp
+obj/queue.o: src/queue.cpp inc/queue.hh inc/tab.hh
+	g++ -c ${FLAGS} -o obj/queue.o src/queue.cpp
 
 obj/tab.o: src/tab.cpp inc/tab.hh
 	g++ -c ${FLAGS} -o obj/tab.o src/tab.cpp
 
-clean:
-	rm -f core* TREE obj/*
+obj/stoper.o: src/stoper.cpp inc/stoper.hh
+	g++ -c ${FLAGS} -o obj/stoper.o src/stoper.cpp
+
+clean: 
+	rm -f core* BAB obj/*
 
 remake:
-	rm -f core* TREE obj/*
+	rm -f core* BAB obj/*
 	make
 
 obj:
