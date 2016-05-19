@@ -1,6 +1,6 @@
-#include "BFS.hh"
+#include "DFS.hh"
 
-Graph_BFS::Graph_BFS (int amountOfVertices) {
+Graph_DFS::Graph_DFS (int amountOfVertices) {
   amountOfMatrix = amountOfVertices;
   listOfVisitors = new elementOfGraph[amountOfMatrix];
   matrix = new bool* [amountOfMatrix];    // tworzy tablicê wska¼ników
@@ -18,7 +18,7 @@ Graph_BFS::Graph_BFS (int amountOfVertices) {
   }
 
 
-Graph_BFS::~Graph_BFS() {
+Graph_DFS::~Graph_DFS() {
   for(int i = 0; i < amountOfMatrix; i++) {
     delete [] matrix[i];
   }
@@ -26,16 +26,16 @@ Graph_BFS::~Graph_BFS() {
   delete [] listOfVisitors;
 }
 
-void Graph_BFS::addVertex (int Vertex) {
+void Graph_DFS::addVertex (int Vertex) {
     }
 
-void Graph_BFS::addEdge (int vertex1, int vertex2) {
+void Graph_DFS::addEdge (int vertex1, int vertex2) {
   matrix[vertex1][vertex2] = true;
    matrix[vertex2][vertex1] = true;
   
 }
 
-int* Graph_BFS::getNeighbours (int Vertex) {
+int* Graph_DFS::getNeighbours (int Vertex) {
   int* Neighbours = new int[amountOfNeighbours(Vertex)];
   int counter = 0;
   for (int i=0; i<amountOfMatrix; i++) {
@@ -48,12 +48,12 @@ int* Graph_BFS::getNeighbours (int Vertex) {
   delete [] Neighbours;
 }
 
-bool Graph_BFS::isConnected (int vertex1, int vertex2) {
+bool Graph_DFS::isConnected (int vertex1, int vertex2) {
   bool checker = matrix[vertex1][vertex2];  
   return checker;
 }
 
-std::istream & operator >> (std::istream & in, Graph_BFS* graf) {
+std::istream & operator >> (std::istream & in, Graph_DFS* graf) {
   int vertex1=1, vertex2=1;
 
   while (true) {
@@ -67,7 +67,7 @@ std::istream & operator >> (std::istream & in, Graph_BFS* graf) {
   return in;
 }
 
-int Graph_BFS::amountOfNeighbours (int Vertex) {
+int Graph_DFS::amountOfNeighbours (int Vertex) {
   int index = 0;
   for (int i=0; i<amountOfMatrix; i++) {
     if (matrix[Vertex][i] == true) {
@@ -77,25 +77,13 @@ int Graph_BFS::amountOfNeighbours (int Vertex) {
   return index;
 }
 
-void  Graph_BFS::BFS (int Vertex) {
-  Queue<int>* kolejka = new Queue<int>;
+void Graph_DFS::DFS (int Vertex) {
+  listOfVisitors[Vertex].setVisited();     // wêze³ odwiedzony
   
-  kolejka->enqueue(Vertex);
+  // rekurencyjne odwiedzanie nieodwiedzonych s±siadów
   
-  listOfVisitors[Vertex].setVisited();      // Wierzcho³ek v oznaczamy jako odwiedzony
-
-  while(kolejka->size()>0) {
-   
-    int graphElement = kolejka->dequeue();             // Usuwamy z kolejki odczytane v
-    
-   for(int i = 0; i <amountOfNeighbours(graphElement) ; i++)
-     if((matrix[graphElement][i] == 1) && !listOfVisitors[i].getVisited())
-      {
-        kolejka->enqueue(i); //umieszczanie nieodwiedzonych sasiadow
-	graphElement=kolejka->dequeue();
-	listOfVisitors[i].setVisited(); // i oznaczenie jako odwiedzonych
-      }
-  }
-  delete kolejka;
+  for(int i = 0; i < amountOfNeighbours(Vertex); i++)
+    if((matrix[Vertex][i] == 1) && !listOfVisitors[i].getVisited()) {
+      DFS(i);
+    }
 }
-
