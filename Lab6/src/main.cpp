@@ -12,10 +12,10 @@ using namespace std;
 
 int main() {
   //Graph_BFS* graf = new Graph_BFS(1000000);
-  Graph_DFS* graf = new Graph_DFS(1000000);
+  Graph_DFS* graf = new Graph_DFS(100);
   //int* neighbours; // zmienna do zdobywania sasiadow wierzcholka
   Stoper stoper;
-  std::ifstream file ("Graf_1000000"); 
+  std::ifstream file ("Graf_100"); 
   double *czas;
 
   file >> graf;
