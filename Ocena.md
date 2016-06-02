@@ -21,6 +21,22 @@ Szablony.
 
 ## Lab6 - tablica asocjacyjna
 
-Brak sprawozdania
+Brak implementacji dynamicznego zwiekszania liczby bucketow i rehashowania.
+Sprawozdanie Ok.1
 
-**Ocena: 2**
+**Ocena: 4**
+
+# Lab7 - drzewa
+
+Wyniki pomiarów, wykresy i wnioski sprawozdania pozostawiają sporo do życzenia.
+Brak jednostek, informacji o tym, co się znajduje w tabelach, nieporządne formatowanie.
+
+Ocena: 3
+
+# Lab8 - grafy (dfs,bfs)
+
+Ocena: 5
+
+# Lab9 - grafy (b&b)
+brak sprawozdania
+ Ocena: 2
